@@ -4,7 +4,7 @@
 
 - Bruno Helder Rodrigues Guedes - 15/0120338
 - Gabriel Mendes Ciriatico Guimarães - 20/2033202
--
+- Luís Henrique Araújo Martis - 22/1002058
 
 ## Instruções de uso:
 
