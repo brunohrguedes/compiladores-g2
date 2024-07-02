@@ -1,0 +1,5 @@
+// testando comentário
+312 423.3
+/* testando agora
+o multi-linha */
+o identificador aqui
