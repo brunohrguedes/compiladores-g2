@@ -1,0 +1,5 @@
+# Saida do lex
+src/lex.yy.c
+
+# Saida do gcc
+src/a.out
