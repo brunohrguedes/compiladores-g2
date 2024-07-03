@@ -5,7 +5,7 @@
 
 %option noyywrap
 
- /* Definições Lex usadas nas expressões regulares */
+ /* Definições do Lex para as expressões regulares */
 whi         while
 if          if
 for         for
