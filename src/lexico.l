@@ -1,11 +1,10 @@
- /* Declaraçõs do C e do scanner */
+/* Declaraçõs do C e do scanner */
 %{
 #include <stdio.h>
 %}
-
 %option noyywrap
 
- /* Definições do Lex para as expressões regulares */
+/* Definições do Lex para as expressões regulares */
 whi         while
 if          if
 for         for
@@ -17,7 +16,7 @@ c           \/\/(.*)\n
 cm          "\/\*"[^\*]*\*+([^\/\*][^\*]*\*+)*\/
 outro       .
 
- /* Definições de tokens, atribuições de expressões regulares e ações */
+/* Definições de tokens, atribuições de expressões regulares e ações */
 %%
 {whi}       { printf("While\n");                    }
 {if}        { printf("If\n");                       }
@@ -31,7 +30,7 @@ outro       .
 {outro}     { printf("Outro\n");                    }
 %%
 
- /* Subrotinas em C */
+/* Subrotinas em C */
 int main(int argc, char *argv[]) {
     FILE *file;
 
