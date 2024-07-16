@@ -3,3 +3,6 @@ src/lex.yy.c
 
 # Saida do gcc
 src/a.out
+
+# Saída do yacc
+y.tab.c
