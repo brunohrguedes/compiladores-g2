@@ -6,3 +6,5 @@ src/a.out
 
 # Saída do yacc
 y.tab.c
+sintatico.tab.c
+sintatico.tab.h
