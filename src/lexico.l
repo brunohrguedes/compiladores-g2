@@ -1,9 +1,7 @@
 /* Declaraçõs do C e do scanner */
 %{
-#include <stdio.h>
 #include "sintatico.tab.h"
 %}
-%option noyywrap
 
 /* Definições do Lex para as expressões regulares */
 whi         while
@@ -28,3 +26,7 @@ outro       .
 {cm}        { return cm; }
 {outro}     { return outro; }
 %%
+
+int yywrap() {
+  return 1;
+}
