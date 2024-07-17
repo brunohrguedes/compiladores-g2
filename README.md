@@ -26,22 +26,23 @@ e executar:
 
 ```
 lex lexico.l
+bison -d sintatico.y
 ```
 
 ### Compilação do arquivo .c:
 
-O arquivo *lex.yy.c* gerado no passo anterior pode ser compilado utilizando o GCC com a flag adequada, como demonstrado no comando a seguir:
+O arquivo _lex.yy.c_ gerado no passo anterior pode ser compilado utilizando o GCC com a flag adequada, como demonstrado no comando a seguir:
 
 ```
-gcc -lfl lex.yy.c
+gcc -lfl lex.yy.c sintatico.tab.c
 ```
 
 ### Execução:
 
-Para executar o programa compilado no passo anterior, basta digitar o caminho do executável seguido do nome do arquivo a ser utilizado. Por exemplo:
+Para executar o programa compilado no passo anterior, basta digitar o caminho do executável a ser utilizado. Por exemplo:
 
 ```
-./a.out teste.txt
+./a.out
 ```
 
 ###### Observação: ainda é necessário estar na pasta /src/ para executar o programa.
