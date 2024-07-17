@@ -7,8 +7,8 @@
 
 /* Definições do Lex para as expressões regulares */
 whi         while
-if_se          if
-for_para         for
+if_se       if
+for_para    for
 id          [a-zA-Z][a-zA-Z0-9]*
 fl          [+|-]?[0-9]*\.[0-9]+
 integer     [+|-]?[0-9]+
@@ -19,8 +19,8 @@ outro       .
 /* Definições de tokens, atribuições de expressões regulares e ações */
 %%
 {whi}       { return whi; }
-{if_se}        { return if_se; }
-{for_para}       { return for_para; }
+{if_se}     { return if_se; }
+{for_para}  { return for_para; }
 {id}        { return id; }
 {fl}        { return fl; }
 {integer}   { return integer; }
