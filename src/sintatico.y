@@ -15,14 +15,19 @@ line: '\n'
 	| programa '\n' { printf ("Programa sintaticamente correto!\n"); };
 programa: '{' lista_cmds '}' {;};
 lista_cmds: cmd {;}
-	| cmd ';' lista_cmds	{;};
+	| cmd ';' lista_cmds {;}
+	| bloco_repeticao {;}
+	| condicional {;}
+	| comentario {;}
+	| outros {;};
 cmd: id '=' exp {;};
 exp: fl {;}
 	| id {;}
 	| integer {;}
-	| exp exp '+' {;};
+	| exp exp '+' {;}
+bloco_repeticao: repeticao '{' lista_cmds '}' {;};
 repeticao: whi '(' exp ')' {;}
-	| for_para {;};
+	| for_para '(' exp ')' {;};
 condicional: if_se '(' exp ')' {;};
 comentario: c | cm {;};
 outros: outro {;};
