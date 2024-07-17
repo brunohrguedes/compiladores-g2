@@ -1,31 +1,34 @@
-/* Verifica a sintaxe de programas segundo a GLC-exemplo */
-/* considerando notacao polonesa para expressoes */
 %{
 #include <stdio.h> 
 %}
-%token whi for_para if_se c cm
-%token id fl integer outro
+%token NUMERO IDENTIFICADOR NOVA_LINHA IF ELSE INT VOID MAIS MENOS ABRE_CHAVES FECHA_CHAVES ABRE_COLCHETES FECHA_COLCHETES IGUAL ABRE_PARENTESES FECHA_PARENTESES
 
 %%
-/* Regras definindo a GLC e acoes correspondentes */
-/* neste nosso exemplo quase todas as acoes estao vazias */
-input: /* empty */ 
-	| input line;
-line: '\n'
-	| programa '\n' { printf ("Programa sintaticamente correto!\n"); };
-programa: '{' lista_cmds '}' {;};
-lista_cmds: cmd {;}
-	| cmd ';' lista_cmds	{;};
-cmd: id '=' exp {;};
-exp: fl {;}
-	| id {;}
-	| integer {;}
-	| exp exp '+' {;};
-repeticao: whi '(' exp ')' {;}
-	| for_para {;};
-condicional: if_se '(' exp ')' {;};
-comentario: c | cm {;};
-outros: outro {;};
+input:    /* empty */
+        | input line
+;
+line:     '\n'
+        | programa '\n'  { printf ("Programa sintaticamente correto!\n"); }
+;
+programa:	ABRE_CHAVES lista_cmds FECHA_CHAVES	{;}
+;
+lista_cmds:	cmd				{;}
+		| cmd ';' lista_cmds	{;}
+;
+cmd:	    declaracao_variavel | declaracao_funcao			{;}
+;
+declaracao_variavel: especificar_tipo ' ' IDENTIFICADOR {;} | especificar_tipo ' ' IDENTIFICADOR ABRE_COLCHETES NUMERO FECHA_COLCHETES {;}
+;
+declaracao_funcao: especificar_tipo ' ' IDENTIFICADOR ' ' ABRE_PARENTESES parametros FECHA_PARENTESES {;}
+;
+parametros: lista_parametros | VOID {;}
+;
+lista_parametros: parametro {;}
+;
+parametro: especificar_tipo ' ' IDENTIFICADOR | especificar_tipo ' ' IDENTIFICADOR ABRE_COLCHETES FECHA_COLCHETES {;}
+;
+especificar_tipo: INT | VOID {;}
+;
 %%
 
 main () 
