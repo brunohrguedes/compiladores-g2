@@ -11,10 +11,12 @@ espaco_branco   [ \t]+
 nova_linha      .|\n
 
 %%
-"if"        {return IF;}
-"else"      {return ELSE;}
+"if"        {return SE;}
+"else"      {return SENAO;}
 "int"       {return INT;}
 "void"      {return VOID;}
+"while"     {return ENQUANTO;}
+"return"    {return RETORNO;}
 "+"         {return MAIS;}
 "-"         {return MENOS;}
 "*"         {return VEZES;}
