@@ -1,5 +1,7 @@
 %{
 #include <stdio.h> 
+int yylex(void);
+void yyerror (char *s);
 %}
 %token NUMERO IDENTIFICADOR NOVA_LINHA IF ELSE INT VOID MAIS MENOS ABRE_CHAVES FECHA_CHAVES ABRE_COLCHETES FECHA_COLCHETES IGUAL ABRE_PARENTESES FECHA_PARENTESES
 
@@ -31,12 +33,11 @@ especificar_tipo: INT | VOID {;}
 ;
 %%
 
-main () 
-{
+int main () {
 	yyparse ();
+	return 0;
 }
-yyerror (s) /* Called by yyparse on error */
-	char *s;
-{
-	printf ("Problema com a analise sintatica!\n", s);
+
+void yyerror (char *s) {
+	printf ("Problema com a analise sintatica: %s\n", s);
 }

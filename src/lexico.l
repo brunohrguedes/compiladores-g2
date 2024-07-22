@@ -1,6 +1,5 @@
 /* Declaraçõs do C e do scanner */
 %{
-#include <stdio.h>
 #include "sintatico.tab.h"
 %}
 
@@ -11,7 +10,6 @@ identificador {letra}+
 espaco_branco [ \t]+
 nova_linha .|\n
 
-%option noyywrap
 %%
 "if" {return IF;}
 "else" {return ELSE;}
@@ -31,3 +29,7 @@ nova_linha .|\n
 {nova_linha} {return yytext[0];}
 {espaco_branco} {;}
 %%
+
+int yywrap() {
+  return 1;
+}
