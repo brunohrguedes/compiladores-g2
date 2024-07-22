@@ -3,27 +3,35 @@
 #include "sintatico.tab.h"
 %}
 
-digito [0-9]
-numero {digito}+
-letra [a-zA-Z]
-identificador {letra}+
-espaco_branco [ \t]+
-nova_linha .|\n
+digito          [0-9]
+numero          {digito}+
+letra           [a-zA-Z]
+identificador   {letra}+
+espaco_branco   [ \t]+
+nova_linha      .|\n
 
 %%
-"if" {return IF;}
-"else" {return ELSE;}
-"int" {return INT;}
-"void" {return VOID;}
-"+" {return MAIS;}
-"-" {return MENOS;}
-"{" {return ABRE_CHAVES;}
-"}" {return FECHA_CHAVES;}
-"[" {return ABRE_COLCHETES;}
-"]" {return FECHA_COLCHETES;}
-"(" {return ABRE_PARENTESES;}
-")" {return FECHA_PARENTESES;}
-"=" {return IGUAL;}
+"if"        {return IF;}
+"else"      {return ELSE;}
+"int"       {return INT;}
+"void"      {return VOID;}
+"+"         {return MAIS;}
+"-"         {return MENOS;}
+"*"         {return VEZES;}
+"/"         {return DIVISAO;}
+"<"         {return MENOR_QUE;}
+"<="        {return MENOR_OU_IGUAL;}
+">"         {return MAIOR_QUE;}
+">="        {return MAIOR_OU_IGUAL;}
+"=="        {return IGUAL_A;}
+"!="        {return DIFERENTE_DE;}
+"="         {return IGUAL;}
+"("         {return ABRE_PARENTESES;}
+")"         {return FECHA_PARENTESES;}
+"["         {return ABRE_COLCHETES;}
+"]"         {return FECHA_COLCHETES;}
+"{"         {return ABRE_CHAVES;}
+"}"         {return FECHA_CHAVES;}
 {numero} {return NUMERO;}
 {identificador} {return IDENTIFICADOR;}
 {nova_linha} {return yytext[0];}
@@ -31,5 +39,5 @@ nova_linha .|\n
 %%
 
 int yywrap() {
-  return 1;
+    return 1;
 }
