@@ -1,7 +1,7 @@
-/* Declaraçõs do C e do scanner */
 %{
 #include "sintatico.tab.h"
 %}
+%option yylineno
 
 digito          [0-9]
 numero          {digito}+

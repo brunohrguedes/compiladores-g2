@@ -2,12 +2,13 @@
 #define YYPARSER
 
 #include <stdio.h> 
-
+extern char *yytext;
+extern int yylineno;
 int yylex(void);
 void yyerror (char *s);
 %}
 
-%token NUMERO IDENTIFICADOR NOVA_LINHA SE SENAO INT VOID MAIS MENOS VEZES DIVISAO
+%token NUMERO IDENTIFICADOR SE SENAO INT VOID MAIS MENOS VEZES DIVISAO
 %token MENOR_QUE MAIOR_QUE MENOR_OU_IGUAL MAIOR_OU_IGUAL IGUAL_A DIFERENTE_DE 
 %token IGUAL ABRE_PARENTESES FECHA_PARENTESES ABRE_COLCHETES FECHA_COLCHETES 
 %token ABRE_CHAVES FECHA_CHAVES ENQUANTO RETORNO
@@ -24,11 +25,11 @@ linha: '\n'
     | programa '\n' { printf ("Programa sintaticamente correto!\n"); }
 ;
 
-programa: ABRE_CHAVES lista_comandos FECHA_CHAVES
+programa: lista_comandos
 ;
 
-lista_comandos:	comando
-    | comando ';' lista_comandos
+lista_comandos:	comando ';' lista_comandos
+    | comando
 ;
 
 comando: declaracao_variavel
@@ -152,6 +153,8 @@ int main () {
 	return 0;
 }
 
-void yyerror (char *s) {
-	printf ("Problema com a analise sintatica: %s\n", s);
+void yyerror(char *s) {
+    fprintf(stderr, "Erro sintático: %s\n", s);
+    fprintf(stderr, "Token inesperado: %s\n", yytext);
+    fprintf(stderr, "Linha: %d\n", yylineno);
 }
