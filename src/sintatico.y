@@ -1,5 +1,8 @@
 %{
+#define YYPARSER
+
 #include <stdio.h> 
+
 int yylex(void);
 void yyerror (char *s);
 %}
@@ -9,8 +12,11 @@ void yyerror (char *s);
 %token IGUAL ABRE_PARENTESES FECHA_PARENTESES ABRE_COLCHETES FECHA_COLCHETES 
 %token ABRE_CHAVES FECHA_CHAVES ENQUANTO RETORNO
 
+%nonassoc MENOR_QUE_SENAO
+%nonassoc SENAO
+
 %%
-entrada: /* vazio */
+entrada: %empty
     | entrada linha
 ;
 
@@ -57,11 +63,11 @@ declaracao_composta: ABRE_CHAVES declaracoes_locais lista_declaracoes FECHA_CHAV
 ;
 
 declaracoes_locais: declaracoes_locais declaracao_variavel
-    | /* vazio */
+    | %empty
 ;
 
 lista_declaracoes: lista_declaracoes declaracao
-    | /* vazio */
+    | %empty
 ;
 
 declaracao: declaraco_expressao
@@ -75,7 +81,7 @@ declaraco_expressao: expressao ';'
     | ';'
 ;
 
-declaracao_selecao: SE ABRE_PARENTESES expressao FECHA_PARENTESES declaracao
+declaracao_selecao: SE ABRE_PARENTESES expressao FECHA_PARENTESES declaracao %prec MENOR_QUE_SENAO
     | SE ABRE_PARENTESES expressao FECHA_PARENTESES declaracao SENAO declaracao
 ;
 
@@ -132,7 +138,7 @@ chamada: IDENTIFICADOR ABRE_PARENTESES argumentos FECHA_PARENTESES
 ;
 
 argumentos: lista_argumentos 
-    | /* vazio */ 
+    | %empty 
 ;
 
 lista_argumentos: lista_argumentos ',' expressao 
