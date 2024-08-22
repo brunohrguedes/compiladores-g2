@@ -8,7 +8,8 @@ numero          {digito}+
 letra           [a-zA-Z]
 identificador   {letra}+
 espaco_branco   [ \t]+
-nova_linha      .|\n
+nova_linha      \n
+outro           .
 
 %%
 "if"        {return SE;}
@@ -34,10 +35,13 @@ nova_linha      .|\n
 "]"         {return FECHA_COLCHETES;}
 "{"         {return ABRE_CHAVES;}
 "}"         {return FECHA_CHAVES;}
-{numero} {return NUMERO;}
-{identificador} {return IDENTIFICADOR;}
-{nova_linha} {return yytext[0];}
+";"         {return PONTO_E_VIRGULA;}
+","         {return VIRGULA;}
+{numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
+{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); return IDENTIFICADOR;}
+{nova_linha}    {return NOVA_LINHA;}
 {espaco_branco} {;}
+{outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}
 %%
 
 int yywrap() {
