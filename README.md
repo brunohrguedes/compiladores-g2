@@ -8,15 +8,16 @@
 
 ## Instruções de uso:
 
-### Utilização do Flex:
+### Utilização do Flex e Bison:
 
-É necessário instalar o programa Flex para gerar o arquivo .c correspondente. Ele pode ser instalado utilizando o comando:
+É necessário instalar os programas Flex e Bison para gerar compilar os arquivos correspondentes. Eles podem ser instalados utilizando os comandos:
 
 ```
+sudo apt install bison
 sudo apt install flex
 ```
 
-Após a instalação, basta navegar até a pasta src:
+Após a instalação, devemos compilar os arquivos _sintatico.y_ e _lexico.l_. Basta navegar até a pasta src
 
 ```
 cd src
@@ -25,15 +26,22 @@ cd src
 e executar:
 
 ```
+bison -d sintatico.y
 lex lexico.l
 ```
 
-### Compilação do arquivo .c:
-
-O arquivo *lex.yy.c* gerado no passo anterior pode ser compilado utilizando o GCC com a flag adequada, como demonstrado no comando a seguir:
+ou utilizar o makefile para executar esses comandos, com:
 
 ```
-gcc -lfl lex.yy.c
+make
+```
+
+### Compilação:
+
+Os arquivos gerados no passo anterior podem ser compilados utilizando o GCC, como demonstrado no comando a seguir:
+
+```
+gcc -o parser sintatico.tab.c lex.yy.c -lfl
 ```
 
 ### Execução:
