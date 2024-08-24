@@ -3,7 +3,7 @@
 
 #include <stdio.h> 
 
-// extern FILE *yyin;
+extern FILE *yyin;
 extern char *yytext;
 extern int yylineno;
 int yylex(void);
@@ -150,7 +150,7 @@ lista_argumentos: lista_argumentos VIRGULA expressao
 %%
 
 int main (int argc, char *argv[]) {
-    /* int c;
+    int c;
     if (argc != 2) {
         printf("Uso: %s arquivo.txt\n", argv[0]);
         return 1;
@@ -161,9 +161,9 @@ int main (int argc, char *argv[]) {
         return 1;
     } else {
         fprintf(stderr, "Arquivo %s aberto com sucesso.\n", argv[1]);
-    } */
+    }
     yyparse();
-    /* fclose(yyin); */
+    fclose(yyin);
 	return 0;
 }
 
