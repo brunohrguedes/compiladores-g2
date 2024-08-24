@@ -51,6 +51,7 @@ declaracao_funcao: especificar_tipo IDENTIFICADOR ABRE_PARENTESES parametros FEC
 
 parametros: lista_parametros
     | VOID
+    | %empty
 ;
 
 lista_parametros: lista_parametros VIRGULA parametro
@@ -61,7 +62,7 @@ parametro: especificar_tipo IDENTIFICADOR
     | especificar_tipo IDENTIFICADOR ABRE_COLCHETES FECHA_COLCHETES
 ;
 
-declaracao_composta: ABRE_CHAVES declaracoes_locais lista_declaracoes FECHA_CHAVES 
+declaracao_composta: ABRE_CHAVES declaracoes_locais lista_declaracoes FECHA_CHAVES
 ;
 
 declaracoes_locais: declaracoes_locais declaracao_variavel
