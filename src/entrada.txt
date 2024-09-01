@@ -1,2 +1,5 @@
-escreva("A media eh: %d", m);
-leia("%d", &b);
+int main(int c){
+    int b;
+    escreva("A media eh: %d", m);
+    leia("%d", &b);
+}

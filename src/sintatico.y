@@ -39,8 +39,6 @@ lista_comandos:	comando PONTO_E_VIRGULA lista_comandos
 
 comando: declaracao_variavel
     | declaracao_funcao
-    | comando_escreva
-    | comando_leia
 ;
 
 comando_escreva: ESCREVA ABRE_PARENTESES lista_argumentos FECHA_PARENTESES PONTO_E_VIRGULA;
@@ -71,21 +69,24 @@ parametro: especificar_tipo IDENTIFICADOR
 ;
 
 declaracao_composta: ABRE_CHAVES declaracoes_locais lista_declaracoes FECHA_CHAVES
-;
+                   | ABRE_CHAVES NOVA_LINHA declaracoes_locais lista_declaracoes FECHA_CHAVES
+                   ;
 
-declaracoes_locais: declaracoes_locais declaracao_variavel
-    | %empty
-;
+declaracoes_locais: declaracoes_locais declaracao_variavel NOVA_LINHA
+                  | %empty
+                  ;
 
-lista_declaracoes: lista_declaracoes declaracao
-    | %empty
-;
+lista_declaracoes: lista_declaracoes declaracao NOVA_LINHA
+                 | %empty
+                 ;
 
 declaracao: declaraco_expressao
     | declaracao_composta
     | declaracao_selecao
     | declaracao_iteracao
     | declaracao_retorno
+    | comando_escreva
+    | comando_leia
 ;
 
 declaraco_expressao: expressao PONTO_E_VIRGULA 
