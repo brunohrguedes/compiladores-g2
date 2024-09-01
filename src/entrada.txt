@@ -1,1 +1,2 @@
-int a;
+escreva("A media eh: %d", m);
+leia("%d", &b);

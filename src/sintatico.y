@@ -15,6 +15,8 @@ void yyerror (char *s);
 %token IGUAL ABRE_PARENTESES FECHA_PARENTESES ABRE_COLCHETES FECHA_COLCHETES 
 %token ABRE_CHAVES FECHA_CHAVES ENQUANTO RETORNO PONTO_E_VIRGULA NOVA_LINHA
 %token VIRGULA
+%token LEIA ESCREVA
+%token STRING E_COMERCIAL
 
 %nonassoc MENOR_QUE_SENAO
 %nonassoc SENAO
@@ -37,7 +39,13 @@ lista_comandos:	comando PONTO_E_VIRGULA lista_comandos
 
 comando: declaracao_variavel
     | declaracao_funcao
+    | comando_escreva
+    | comando_leia
 ;
+
+comando_escreva: ESCREVA ABRE_PARENTESES lista_argumentos FECHA_PARENTESES PONTO_E_VIRGULA;
+
+comando_leia: LEIA ABRE_PARENTESES lista_argumentos FECHA_PARENTESES PONTO_E_VIRGULA;
 
 declaracao_variavel: especificar_tipo IDENTIFICADOR PONTO_E_VIRGULA
     | especificar_tipo IDENTIFICADOR ABRE_COLCHETES NUMERO FECHA_COLCHETES PONTO_E_VIRGULA
@@ -144,8 +152,13 @@ argumentos: lista_argumentos
     | %empty 
 ;
 
-lista_argumentos: lista_argumentos VIRGULA expressao 
-    | expressao 
+lista_argumentos: lista_argumentos VIRGULA argumento 
+                | argumento 
+;
+
+argumento: expressao 
+         | E_COMERCIAL IDENTIFICADOR
+         | STRING
 ;
 
 %%
