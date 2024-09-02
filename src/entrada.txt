@@ -1,5 +1,8 @@
+int a;
+int b;
 int main(int c){
-    int b;
-    escreva("A media eh: %d", m);
+    leia("%d", &a);
     leia("%d", &b);
+    c=a+b/2;
+    escreva("A media eh: %d", c);
 }

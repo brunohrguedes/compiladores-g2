@@ -17,8 +17,8 @@ outro           .
 "escreva"   {return ESCREVA;}
 "if"        {return SE;}
 "else"      {return SENAO;}
-"int"       {return INT;}
-"void"      {return VOID;}
+"int"       { return INT; }
+"void"      { return VOID; }
 "while"     {return ENQUANTO;}
 "return"    {return RETORNO;}
 "+"         {return MAIS;}
@@ -43,7 +43,7 @@ outro           .
 "&"         {return E_COMERCIAL;}
 {string}    {printf("Token STRING: %s\n", yytext); return STRING;}
 {numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
-{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); return IDENTIFICADOR;}
+{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
 {nova_linha}    {return NOVA_LINHA;}
 {espaco_branco} {;}
 {outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}
