@@ -1,58 +1,54 @@
-/* Declaraçõs do C e do scanner */
 %{
-#include <stdio.h>
+#include "sintatico.tab.h"
 %}
-%option noyywrap
+%option yylineno
 
-/* Definições do Lex para as expressões regulares */
-whi         while
-if          if
-for         for
-id          [a-zA-Z][a-zA-Z0-9]*
-fl          [+|-]?[0-9]*\.[0-9]+
-integer     [+|-]?[0-9]+
-nl          [ \t\n\r]+
-c           \/\/(.*)\n
-cm          "\/\*"[^\*]*\*+([^\/\*][^\*]*\*+)*\/
-outro       .
+digito          [0-9]
+numero          {digito}+
+letra           [a-zA-Z]
+identificador   {letra}+
+espaco_branco   [ \t]+
+string          \"[^\"]*\"
+nova_linha      \n
+outro           .
 
-/* Definições de tokens, atribuições de expressões regulares e ações */
 %%
-{whi}       { printf("While\n");                    }
-{if}        { printf("If\n");                       }
-{for}       { printf("For\n");                      }
-{id}        { printf("Identificador\n");            }
-{fl}        { printf("Float\n");                    }
-{integer}   { printf("Inteiro\n");                  }
-{nl}        { ;                                     }
-{c}         { printf("Comentário\n");               }
-{cm}        { printf("Comentário multi-linha\n");   }
-{outro}     { printf("Outro\n");                    }
+"leia"      {return LEIA;}
+"escreva"   {return ESCREVA;}
+"if"        {return SE;}
+"else"      {return SENAO;}
+"int"       {return INT;}
+"void"      {return VOID;}
+"while"     {return ENQUANTO;}
+"return"    {return RETORNO;}
+"+"         {return MAIS;}
+"-"         {return MENOS;}
+"*"         {return VEZES;}
+"/"         {return DIVISAO;}
+"<"         {return MENOR_QUE;}
+"<="        {return MENOR_OU_IGUAL;}
+">"         {return MAIOR_QUE;}
+">="        {return MAIOR_OU_IGUAL;}
+"=="        {return IGUAL_A;}
+"!="        {return DIFERENTE_DE;}
+"="         {return IGUAL;}
+"("         {return ABRE_PARENTESES;}
+")"         {return FECHA_PARENTESES;}
+"["         {return ABRE_COLCHETES;}
+"]"         {return FECHA_COLCHETES;}
+"{"         {return ABRE_CHAVES;}
+"}"         {return FECHA_CHAVES;}
+";"         {return PONTO_E_VIRGULA;}
+","         {return VIRGULA;}
+"&"         {return E_COMERCIAL;}
+{string}    {printf("Token STRING: %s\n", yytext); return STRING;}
+{numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
+{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); return IDENTIFICADOR;}
+{nova_linha}    {return NOVA_LINHA;}
+{espaco_branco} {;}
+{outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}
 %%
 
-/* Subrotinas em C */
-int main(int argc, char *argv[]) {
-    FILE *file;
-
-    if (argc != 2) {
-        printf("Uso: %s arquivo.txt\n", argv[0]);
-        return 1;
-    }
-
-    file = fopen(argv[1], "r");
-    if (file == NULL) {
-        printf("Não foi possível abrir o arquivo %s\n", argv[1]);
-        return 1;
-    }
-
-    // yyin é uma variável global definida pelo Flex para o arquivo de entrada
-    yyin = file;
-
-    // Chama o scanner gerado pelo Flex
-    yylex();
-
-    // Fecha o arquivo após a leitura
-    fclose(file);
-
-    return 0;
+int yywrap() {
+    return 1;
 }

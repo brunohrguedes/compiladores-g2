@@ -3,6 +3,9 @@ src/lex.yy.c
 
 # Saida do gcc
 src/a.out
+src/parser
 
 # Saída do yacc
 y.tab.c
+sintatico.tab.c
+sintatico.tab.h
