@@ -8,10 +8,13 @@ numero          {digito}+
 letra           [a-zA-Z]
 identificador   {letra}+
 espaco_branco   [ \t]+
+string          \"[^\"]*\"
 nova_linha      \n
 outro           .
 
 %%
+"leia"      {return LEIA;}
+"escreva"   {return ESCREVA;}
 "if"        {return SE;}
 "else"      {return SENAO;}
 "int"       { return INT; }
@@ -37,8 +40,10 @@ outro           .
 "}"         {return FECHA_CHAVES;}
 ";"         {return PONTO_E_VIRGULA;}
 ","         {return VIRGULA;}
-{numero}    {return NUMERO;}
-{identificador} {yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
+"&"         {return E_COMERCIAL;}
+{string}    {printf("Token STRING: %s\n", yytext); return STRING;}
+{numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
+{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
 {nova_linha}    {return NOVA_LINHA;}
 {espaco_branco} {;}
 {outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}
