@@ -42,8 +42,8 @@ outro           .
 ","         {return VIRGULA;}
 "&"         {return E_COMERCIAL;}
 {string}    {printf("Token STRING: %s\n", yytext); return STRING;}
-{numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
-{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
+{numero}    {return NUMERO;}
+{identificador} {yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
 {nova_linha}    {return NOVA_LINHA;}
 {espaco_branco} {;}
 {outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}

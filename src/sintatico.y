@@ -355,7 +355,6 @@ int main (int argc, char *argv[]) {
     adicionarWarnings(tabelaGlobal);
     imprimirWarnings();
     printf ("Programa sintaticamente correto!\n");
-    printf ("Programa semanticamente correto!\n");
     fclose(yyin);
 	return 0;
 }
