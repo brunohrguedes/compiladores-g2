@@ -14,8 +14,8 @@ outro           .
 %%
 "if"        {return SE;}
 "else"      {return SENAO;}
-"int"       {return INT;}
-"void"      {return VOID;}
+"int"       { return INT; }
+"void"      { return VOID; }
 "while"     {return ENQUANTO;}
 "return"    {return RETORNO;}
 "+"         {return MAIS;}
@@ -37,8 +37,8 @@ outro           .
 "}"         {return FECHA_CHAVES;}
 ";"         {return PONTO_E_VIRGULA;}
 ","         {return VIRGULA;}
-{numero}    {printf("Token NUMERO: %s\n", yytext); return NUMERO;}
-{identificador} {printf("Token IDENTIFICADOR: %s\n", yytext); return IDENTIFICADOR;}
+{numero}    {return NUMERO;}
+{identificador} {yylval.cadeia= (char *) strdup(yytext); return IDENTIFICADOR;}
 {nova_linha}    {return NOVA_LINHA;}
 {espaco_branco} {;}
 {outro}         {printf("Caractere desconhecido: %s\n", yytext); return yytext[0];}
